@@ -11,6 +11,7 @@
 #import "LLPhotoDefine.h"
 #import <Photos/Photos.h>
 
+/// 媒体类型
 typedef NS_ENUM(NSInteger, LLMediaType){
     
     kMediaTypeNormal = 0,
@@ -18,15 +19,25 @@ typedef NS_ENUM(NSInteger, LLMediaType){
     kMediaTypeVideo
 };
 
+/// 照片展示类型
+typedef NS_ENUM(NSInteger, LLBrowserType){
+    
+    kBrowserNormal = 0,  // photo and video
+    kBrowserPhoto,       // only photo
+    kBrowserVideo,       // only video
+    kBrowserAlbum,       // photo album
+    kBrowserPlay
+};
+
 @interface LLAssetManager : NSObject
 
 + (LLAssetManager *)shareInstance;
 
-- (NSArray *)filterAssets:(NSArray *)assets WithType:(LLMediaType)type;
+- (NSArray *)allAssetsWithType:(LLBrowserType)type;
 
 - (NSArray *)allAssetGroups;
 
-- (NSArray *)assetsWithGroup:(id)group filterType:(LLMediaType)type;
+- (NSArray *)assetsWithGroup:(id)group filterType:(LLBrowserType)type;
 @end
 
 #import "LLAsset.h"

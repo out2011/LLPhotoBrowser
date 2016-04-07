@@ -12,6 +12,7 @@
 
 - (void)configWithAssetGroup:(LLAssetGroup *)assetGroup {
     
+    self.previewImage.image = assetGroup.thumbnail;
     self.albumName.text = assetGroup.name;
     
     NSMutableAttributedString *nameString = [[NSMutableAttributedString alloc] initWithString:assetGroup.name attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16],NSForegroundColorAttributeName:[UIColor blackColor]}];

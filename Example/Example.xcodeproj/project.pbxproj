@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A15F5901CB600C400E13729 /* LLCancelButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A15F58F1CB600C400E13729 /* LLCancelButton.m */; };
 		3A1EB9181CB49B31002A4EBF /* LLPhotoCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1EB9171CB49B31002A4EBF /* LLPhotoCollectionController.m */; };
 		3A1EB91E1CB49B99002A4EBF /* LLAlbumTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1EB91D1CB49B99002A4EBF /* LLAlbumTableController.m */; };
 		3A23C3AF1CAE048400E0BBB2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A23C3AE1CAE048400E0BBB2 /* main.m */; };
@@ -25,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A15F58E1CB600C400E13729 /* LLCancelButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLCancelButton.h; sourceTree = "<group>"; };
+		3A15F58F1CB600C400E13729 /* LLCancelButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLCancelButton.m; sourceTree = "<group>"; };
 		3A1EB9161CB49B31002A4EBF /* LLPhotoCollectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLPhotoCollectionController.h; sourceTree = "<group>"; };
 		3A1EB9171CB49B31002A4EBF /* LLPhotoCollectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLPhotoCollectionController.m; sourceTree = "<group>"; };
 		3A1EB91C1CB49B99002A4EBF /* LLAlbumTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAlbumTableController.h; sourceTree = "<group>"; };
@@ -150,6 +153,8 @@
 				3AB554B51CB4FE2D00540317 /* LLAssetCell.h */,
 				3AB554B61CB4FE2D00540317 /* LLAssetCell.m */,
 				3AB554B81CB4FE5700540317 /* LLAssetCell.xib */,
+				3A15F58E1CB600C400E13729 /* LLCancelButton.h */,
+				3A15F58F1CB600C400E13729 /* LLCancelButton.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -227,6 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A1EB91E1CB49B99002A4EBF /* LLAlbumTableController.m in Sources */,
+				3A15F5901CB600C400E13729 /* LLCancelButton.m in Sources */,
 				3AB554B21CB4EE0D00540317 /* LLAlbumCell.m in Sources */,
 				3A23C3B51CAE048400E0BBB2 /* ViewController.m in Sources */,
 				3A23C3B21CAE048400E0BBB2 /* AppDelegate.m in Sources */,

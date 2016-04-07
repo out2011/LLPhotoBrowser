@@ -9,6 +9,7 @@
 
 #import "LLPhotoCollectionController.h"
 #import "LLAssetCell.h"
+#import "LLCancelButton.h"
 
 @interface LLPhotoCollectionController()<UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -20,11 +21,17 @@
     
     [super viewDidLoad];
     
+    self.navigationItem.rightBarButtonItem = [[LLCancelButton alloc] initWithController:self];
+    
     self.collectionView.backgroundColor = [UIColor whiteColor];
     self.collectionView.delegate = self;
     [self.collectionView registerNib:[UINib nibWithNibName:@"LLAssetCell" bundle:nil] forCellWithReuseIdentifier:kAssetCellIdentifier];
     
-    NSLog(@"%ld", self.assets.count);
+}
+
+- (void)dismiss {
+    
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - collection view data source & delegate
@@ -48,7 +55,7 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+
     NSLog(@"%ld", indexPath.row);
 }
 

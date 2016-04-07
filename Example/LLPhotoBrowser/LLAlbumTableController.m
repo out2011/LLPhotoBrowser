@@ -9,10 +9,12 @@
 #import "LLAlbumTableController.h"
 #import "LLPhotoCollectionController.h"
 #import "LLAlbumCell.h"
+#import "LLCancelButton.h"
 
 @interface LLAlbumTableController()<UITableViewDataSource, UITableViewDelegate>
 
 
+@property (nonatomic, assign) BOOL shouldHidden;
 
 @property (nonatomic, strong) NSArray *albums;
 
@@ -34,6 +36,19 @@
     
     [super viewDidLoad];
     
+    if (!_browserType) {
+        
+        _browserType = kBrowserNormal;
+    }
+    
+    if (_browserType == kBrowserAlbum) {
+        
+        _shouldHidden = YES;
+    }
+    
+    self.title = @"相册";
+    self.navigationItem.rightBarButtonItem = [[LLCancelButton alloc] initWithController:self];
+    
     self.tableView.delegate = self;
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.tableView.rowHeight = 60.0;
@@ -43,11 +58,25 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
-    if (_browserType == kBrowserAlbum) {
+    
+    if (_shouldHidden) {
+        _shouldHidden = !_shouldHidden;
+        
+        LLPhotoCollectionController *photoCC = [[LLPhotoCollectionController alloc] initWithCollectionViewLayout:[self photoCollectionViewLayoutWithWidth:kScreenSize.width]];
+        photoCC.assets = [self.assetManager allAssetsWithType:_browserType];
+        
+        [self.navigationController pushViewController:photoCC animated:NO];
+    }
+    else {
         
         _albums = [self.assetManager allAssetGroups];
         [self.tableView reloadData];
     }
+}
+
+- (void)dismiss {
+    
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - table view data source & delegate
@@ -73,17 +102,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    LLPhotoCollectionController *photoCC = [[LLPhotoCollectionController alloc] initWithCollectionViewLayout:[self photoCollectionViewLayoutWithWidth:self.view.bounds.size.width]];
+    LLPhotoCollectionController *photoCC = [[LLPhotoCollectionController alloc] initWithCollectionViewLayout:[self photoCollectionViewLayoutWithWidth:kScreenSize.width]];
     
-    photoCC.assets = [self.assetManager assetsWithGroup:_albums[indexPath.row] filterType:_mediaType];
+    photoCC.assets = [self.assetManager assetsWithGroup:_albums[indexPath.row] filterType:_browserType];
     
     [self.navigationController pushViewController:photoCC animated:YES];
 }
 
 - (UICollectionViewLayout *)photoCollectionViewLayoutWithWidth:(CGFloat)width {
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    CGFloat margin = 6;
-    CGFloat itemWH = (width - 3 * margin) / 4;
+    CGFloat margin = 4;
+    CGFloat itemWH = (width - 2 * margin) / 3;
     layout.itemSize = CGSizeMake(itemWH, itemWH);
     layout.minimumInteritemSpacing = margin;
     layout.minimumLineSpacing = margin;

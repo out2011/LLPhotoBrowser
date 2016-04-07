@@ -19,5 +19,6 @@
 
 #define kLLThumbnailSize CGSizeMake(80, 80)
 
+#define kLLScreenScale [UIScreen mainScreen].scale
 
 #endif /* LLPhotoDefine_h */

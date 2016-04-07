@@ -21,6 +21,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+}
+
+- (IBAction)buttonPressed:(id)sender {
+    
     /// 获取调用相册时系统提示方法
     if ([ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusNotDetermined) {
         
@@ -44,15 +48,12 @@
     }
     
     LLAlbumTableController *albumTC = [[LLAlbumTableController alloc] init];
-    albumTC.browserType = kBrowserAlbum;
-    albumTC.mediaType = kMediaTypeNormal;
-    [self.navigationController pushViewController:albumTC animated:YES];
+    albumTC.browserType = kBrowserNormal;
     
+    UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:albumTC];
+    
+    [self presentViewController:naVC animated:YES completion:nil];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end

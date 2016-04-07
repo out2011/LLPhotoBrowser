@@ -9,23 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "LLAssetManager.h"
 
-
-typedef NS_ENUM(NSInteger, LLBrowserType){
-    
-    kBrowserNormal = 0,  // photo and video
-    kBrowserPhoto,       // only photo
-    kBrowserVideo,       // only video
-    kBrowserAlbum,       // photo album
-    kBrowserPlay
-};
-
 @interface LLAlbumTableController : UITableViewController
 
 @property (nonatomic, strong) LLAssetManager *assetManager;
 
 @property (nonatomic, assign) LLBrowserType browserType;
-
-@property (nonatomic, assign) LLMediaType mediaType;
-
 
 @end

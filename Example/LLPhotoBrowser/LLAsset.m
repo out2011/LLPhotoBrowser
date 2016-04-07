@@ -213,8 +213,8 @@
         imageRequestOptions.synchronous = YES;
         imageRequestOptions.resizeMode = PHImageRequestOptionsResizeModeExact;
         // 在 PHImageManager 中，targetSize 等 size 都是使用 px 作为单位，因此需要对targetSize 中对传入的 Size 进行处理，宽高各自乘以 ScreenScale，从而得到正确的图片
-        CGFloat screenScale = [UIScreen mainScreen].scale;
-        [self.cachingImageManager requestImageForAsset:_asset targetSize:CGSizeMake(size.width * screenScale, size.height * screenScale) contentMode:PHImageContentModeAspectFit options:imageRequestOptions resultHandler:^(UIImage *result, NSDictionary *info) {
+        CGSize size = CGSizeMake(kLLThumbnailSize.width * kLLScreenScale, kLLThumbnailSize.height * kLLScreenScale);
+        [self.cachingImageManager requestImageForAsset:_asset targetSize:size contentMode:PHImageContentModeAspectFit options:imageRequestOptions resultHandler:^(UIImage *result, NSDictionary *info) {
             
             resultImage = result;
         }];

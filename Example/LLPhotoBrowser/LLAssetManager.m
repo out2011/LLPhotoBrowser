@@ -132,13 +132,14 @@ static LLAssetManager *assetManager = nil;
                                }];
 }
 
-- (NSArray *)allAssetsWithType:(LLMediaType)type {
+- (NSArray *)allAssetsWithType:(LLBrowserType)type {
     
     [self loadAssets];
-    if (!type) {
+    LLMediaType mediaType = [self mediaTypeWithBrowserType:type];
+    if (mediaType == kMediaTypeNormal) {
         return _assets;
     }
-    return [self filterAssets:_assets WithType:type];
+    return [self filterAssets:_assets withType:mediaType];
 }
 
 - (NSArray *)allAssetGroups {
@@ -147,26 +148,7 @@ static LLAssetManager *assetManager = nil;
     return _assetGroups;
 }
 
-- (NSArray *)filterAssets:(NSArray *)assets WithType:(LLMediaType)type {
-    
-    if (type == kMediaTypeNormal) {
-        
-        return assets;
-    }
-    
-    NSMutableArray *result = [NSMutableArray array];
-    for (int i = 0; i < assets.count; i++) {
-        
-        LLAsset *asset = assets[i];
-        if (asset.mediaType == type) {
-            
-            [result addObject:asset];
-        }
-    }
-    return [result copy];
-}
-
-- (NSArray *)assetsWithGroup:(id)group filterType:(LLMediaType)type {
+- (NSArray *)assetsWithGroup:(id)group filterType:(LLBrowserType)type {
     
     LLAssetGroup *album = (LLAssetGroup *)group;
     
@@ -185,10 +167,45 @@ static LLAssetManager *assetManager = nil;
         }];
     }
     
-    if (!type) {
+    LLMediaType mediaType = [self mediaTypeWithBrowserType:type];
+    if (mediaType == kMediaTypeNormal) {
         return photoArr;
     }
-    return [self filterAssets:photoArr WithType:type];
+    return [self filterAssets:photoArr withType:mediaType];
 }
 
+- (NSArray *)filterAssets:(NSArray *)assets withType:(LLMediaType)type {
+    
+    if (type == kMediaTypeNormal) {
+        
+        return assets;
+    }
+    
+    NSMutableArray *result = [NSMutableArray array];
+    for (int i = 0; i < assets.count; i++) {
+        
+        LLAsset *asset = assets[i];
+        if (asset.mediaType == type) {
+            
+            [result addObject:asset];
+        }
+    }
+    return [result copy];
+}
+
+- (LLMediaType)mediaTypeWithBrowserType:(LLBrowserType)browserType {
+    
+    if (browserType == kBrowserPhoto) {
+        
+        return kMediaTypePhoto;
+    }
+    else if (browserType == kBrowserVideo) {
+        
+        return kMediaTypeVideo;
+    }
+    else {
+        
+        return kMediaTypeNormal;
+    }
+}
 @end
