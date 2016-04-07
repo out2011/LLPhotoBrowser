@@ -48,7 +48,7 @@
     }
     
     LLAlbumTableController *albumTC = [[LLAlbumTableController alloc] init];
-    albumTC.browserType = kBrowserNormal;
+    albumTC.browserType = kBrowserPlay;
     
     UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:albumTC];
     

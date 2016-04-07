@@ -10,8 +10,11 @@
 #import "LLPhotoCollectionController.h"
 #import "LLAssetCell.h"
 #import "LLCancelButton.h"
+#import "LLPlayViewController.h"
 
 @interface LLPhotoCollectionController()<UICollectionViewDataSource, UICollectionViewDelegate>
+
+@property (nonatomic, assign) BOOL shouldHidden;
 
 @end
 
@@ -21,12 +24,33 @@
     
     [super viewDidLoad];
     
+    if (_browserType == kBrowserPlay) {
+        
+        _shouldHidden = YES;
+    }
+    
     self.navigationItem.rightBarButtonItem = [[LLCancelButton alloc] initWithController:self];
     
     self.collectionView.backgroundColor = [UIColor whiteColor];
     self.collectionView.delegate = self;
     [self.collectionView registerNib:[UINib nibWithNibName:@"LLAssetCell" bundle:nil] forCellWithReuseIdentifier:kAssetCellIdentifier];
     
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    if (_shouldHidden) {
+        
+        _shouldHidden = !_shouldHidden;
+        
+        LLPlayViewController *playVC = [[LLPlayViewController alloc] init];
+        playVC.assets = _assets;
+        playVC.currentIndex = 0;
+        
+        [self.navigationController pushViewController:playVC animated:NO];
+    }
 }
 
 - (void)dismiss {

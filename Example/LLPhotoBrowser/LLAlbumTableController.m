@@ -41,7 +41,7 @@
         _browserType = kBrowserNormal;
     }
     
-    if (_browserType == kBrowserAlbum) {
+    if (_browserType != kBrowserAlbum) {
         
         _shouldHidden = YES;
     }
@@ -60,12 +60,16 @@
     [super viewWillAppear:animated];
     
     if (_shouldHidden) {
+        
         _shouldHidden = !_shouldHidden;
         
+        
         LLPhotoCollectionController *photoCC = [[LLPhotoCollectionController alloc] initWithCollectionViewLayout:[self photoCollectionViewLayoutWithWidth:kScreenSize.width]];
+        photoCC.browserType = _browserType;
         photoCC.assets = [self.assetManager allAssetsWithType:_browserType];
         
         [self.navigationController pushViewController:photoCC animated:NO];
+        
     }
     else {
         

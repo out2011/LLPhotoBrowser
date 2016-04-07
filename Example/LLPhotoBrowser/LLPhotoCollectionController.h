@@ -13,4 +13,6 @@
 
 @property (nonatomic, strong) NSArray *assets;
 
+@property (nonatomic, assign) LLBrowserType browserType;
+
 @end

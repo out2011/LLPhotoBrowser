@@ -19,6 +19,7 @@
 		3A23C3CB1CAE154D00E0BBB2 /* LLAssetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A23C3CA1CAE154D00E0BBB2 /* LLAssetManager.m */; };
 		3A23C3D01CAE5B8400E0BBB2 /* LLAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A23C3CF1CAE5B8400E0BBB2 /* LLAsset.m */; };
 		3A23C3D31CAE5B9600E0BBB2 /* LLAssetGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A23C3D21CAE5B9600E0BBB2 /* LLAssetGroup.m */; };
+		3A3E6C041CB65D0800BF91E2 /* LLPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3E6C031CB65D0800BF91E2 /* LLPlayViewController.m */; };
 		3AB554B21CB4EE0D00540317 /* LLAlbumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB554B11CB4EE0D00540317 /* LLAlbumCell.m */; };
 		3AB554B41CB4EE3F00540317 /* LLAlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AB554B31CB4EE3F00540317 /* LLAlbumCell.xib */; };
 		3AB554B71CB4FE2D00540317 /* LLAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB554B61CB4FE2D00540317 /* LLAssetCell.m */; };
@@ -49,6 +50,8 @@
 		3A23C3CF1CAE5B8400E0BBB2 /* LLAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAsset.m; sourceTree = "<group>"; };
 		3A23C3D11CAE5B9600E0BBB2 /* LLAssetGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAssetGroup.h; sourceTree = "<group>"; };
 		3A23C3D21CAE5B9600E0BBB2 /* LLAssetGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAssetGroup.m; sourceTree = "<group>"; };
+		3A3E6C021CB65D0800BF91E2 /* LLPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLPlayViewController.h; sourceTree = "<group>"; };
+		3A3E6C031CB65D0800BF91E2 /* LLPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLPlayViewController.m; sourceTree = "<group>"; };
 		3AB554B01CB4EE0D00540317 /* LLAlbumCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAlbumCell.h; sourceTree = "<group>"; };
 		3AB554B11CB4EE0D00540317 /* LLAlbumCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAlbumCell.m; sourceTree = "<group>"; };
 		3AB554B31CB4EE3F00540317 /* LLAlbumCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LLAlbumCell.xib; sourceTree = "<group>"; };
@@ -75,6 +78,8 @@
 				3A1EB91D1CB49B99002A4EBF /* LLAlbumTableController.m */,
 				3A1EB9161CB49B31002A4EBF /* LLPhotoCollectionController.h */,
 				3A1EB9171CB49B31002A4EBF /* LLPhotoCollectionController.m */,
+				3A3E6C021CB65D0800BF91E2 /* LLPlayViewController.h */,
+				3A3E6C031CB65D0800BF91E2 /* LLPlayViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -233,6 +238,7 @@
 			files = (
 				3A1EB91E1CB49B99002A4EBF /* LLAlbumTableController.m in Sources */,
 				3A15F5901CB600C400E13729 /* LLCancelButton.m in Sources */,
+				3A3E6C041CB65D0800BF91E2 /* LLPlayViewController.m in Sources */,
 				3AB554B21CB4EE0D00540317 /* LLAlbumCell.m in Sources */,
 				3A23C3B51CAE048400E0BBB2 /* ViewController.m in Sources */,
 				3A23C3B21CAE048400E0BBB2 /* AppDelegate.m in Sources */,
