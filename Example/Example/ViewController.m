@@ -35,8 +35,11 @@
             if (*stop) {
                 
                 LLAlbumTableController *albumTC = [[LLAlbumTableController alloc] init];
-                albumTC.browserType = kBrowserAlbum;
-                [self.navigationController pushViewController:albumTC animated:YES];
+                albumTC.browserType = kBrowserPlay;
+                
+                UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:albumTC];
+                
+                [self presentViewController:naVC animated:YES completion:nil];
                 return;
             }
             *stop = TRUE;
@@ -47,12 +50,17 @@
         }];
     }
     
-    LLAlbumTableController *albumTC = [[LLAlbumTableController alloc] init];
-    albumTC.browserType = kBrowserPlay;
+    else {
+        
+        LLAlbumTableController *albumTC = [[LLAlbumTableController alloc] init];
+        albumTC.browserType = kBrowserPlay;
+        
+        UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:albumTC];
+        
+        [self presentViewController:naVC animated:YES completion:nil];
+    }
     
-    UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:albumTC];
     
-    [self presentViewController:naVC animated:YES completion:nil];
 }
 
 

@@ -47,11 +47,13 @@
     }
     
     self.title = @"相册";
-    self.navigationItem.rightBarButtonItem = [[LLCancelButton alloc] initWithController:self];
+    UIBarButtonItem *cancelBt = [[UIBarButtonItem alloc] init];
+    cancelBt.customView = [[LLCancelButton alloc] initWithController:self];
+    self.navigationItem.rightBarButtonItem = cancelBt;
     
     self.tableView.delegate = self;
     self.tableView.tableFooterView = [[UIView alloc] init];
-    self.tableView.rowHeight = 60.0;
+    self.tableView.rowHeight = 70.0;
     [self.tableView registerNib:[UINib nibWithNibName:@"LLAlbumCell" bundle:nil] forCellReuseIdentifier:kAlbumCellIdentifier];
 }
 
@@ -67,6 +69,7 @@
         LLPhotoCollectionController *photoCC = [[LLPhotoCollectionController alloc] initWithCollectionViewLayout:[self photoCollectionViewLayoutWithWidth:kScreenSize.width]];
         photoCC.browserType = _browserType;
         photoCC.assets = [self.assetManager allAssetsWithType:_browserType];
+        photoCC.title = @"所有照片";
         
         [self.navigationController pushViewController:photoCC animated:NO];
         
@@ -108,7 +111,10 @@
     
     LLPhotoCollectionController *photoCC = [[LLPhotoCollectionController alloc] initWithCollectionViewLayout:[self photoCollectionViewLayoutWithWidth:kScreenSize.width]];
     
-    photoCC.assets = [self.assetManager assetsWithGroup:_albums[indexPath.row] filterType:_browserType];
+    LLAssetGroup *album = _albums[indexPath.row];
+    
+    photoCC.assets = [self.assetManager assetsWithGroup:album filterType:_browserType];
+    photoCC.title = album.name;
     
     [self.navigationController pushViewController:photoCC animated:YES];
 }

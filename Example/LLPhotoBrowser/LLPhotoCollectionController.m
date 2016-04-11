@@ -29,8 +29,9 @@
         _shouldHidden = YES;
     }
     
-    self.navigationItem.rightBarButtonItem = [[LLCancelButton alloc] initWithController:self];
-    
+    UIBarButtonItem *cancelBt = [[UIBarButtonItem alloc] init];
+    cancelBt.customView = [[LLCancelButton alloc] initWithController:self];
+    self.navigationItem.rightBarButtonItem = cancelBt;
     self.collectionView.backgroundColor = [UIColor whiteColor];
     self.collectionView.delegate = self;
     [self.collectionView registerNib:[UINib nibWithNibName:@"LLAssetCell" bundle:nil] forCellWithReuseIdentifier:kAssetCellIdentifier];
@@ -40,6 +41,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
+    
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
     
     if (_shouldHidden) {
         
@@ -51,6 +54,12 @@
         
         [self.navigationController pushViewController:playVC animated:NO];
     }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
 }
 
 - (void)dismiss {
@@ -80,7 +89,11 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
-    NSLog(@"%ld", indexPath.row);
+    LLPlayViewController *playVC = [[LLPlayViewController alloc] init];
+    playVC.assets = _assets;
+    playVC.currentIndex = indexPath.row;
+    
+    [self.navigationController pushViewController:playVC animated:YES];
 }
 
 @end

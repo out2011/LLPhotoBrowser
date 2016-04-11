@@ -22,11 +22,10 @@
     
     _controller = controller;
     
-    UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0,0,38,25)];
-    [rightButton setTitle:@"取消" forState:UIControlStateNormal];
-    [rightButton setTitleColor:[UIColor colorWithRed:0 / 255.0 green:122 / 255.0 blue:255 / 255.0 alpha:1] forState:UIControlStateNormal];
-    [rightButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
-    self.customView = rightButton;
+    self.frame = CGRectMake(0,0,38,25);
+    [self setTitle:@"取消" forState:UIControlStateNormal];
+    [self setTitleColor:[UIColor colorWithRed:0 / 255.0 green:122 / 255.0 blue:255 / 255.0 alpha:1] forState:UIControlStateNormal];
+    [self addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
     
     return self;
 }

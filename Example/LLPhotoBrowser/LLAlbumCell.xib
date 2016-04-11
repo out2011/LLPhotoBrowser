@@ -7,23 +7,23 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="albumCell" rowHeight="60" id="rHc-6Y-xQy" customClass="LLAlbumCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="albumCell" rowHeight="70" id="rHc-6Y-xQy" customClass="LLAlbumCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rHc-6Y-xQy" id="aci-dO-cqs">
-                <rect key="frame" x="0.0" y="0.0" width="287" height="59.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="287" height="68.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="c4d-QH-LxH">
-                        <rect key="frame" x="8" y="7" width="80" height="45.5"/>
+                        <rect key="frame" x="8" y="7" width="80" height="54.5"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="80" id="8Bx-Q1-Owg"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1111" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aSe-Qn-ZMp">
-                        <rect key="frame" x="96" y="19" width="183" height="21"/>
+                        <rect key="frame" x="96" y="19" width="183" height="30"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -41,7 +41,7 @@
                 <outlet property="albumName" destination="aSe-Qn-ZMp" id="Xoo-0F-aRj"/>
                 <outlet property="previewImage" destination="c4d-QH-LxH" id="K4E-Jo-Dp2"/>
             </connections>
-            <point key="canvasLocation" x="286" y="151"/>
+            <point key="canvasLocation" x="286" y="155.5"/>
         </tableViewCell>
     </objects>
 </document>

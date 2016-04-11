@@ -12,33 +12,35 @@
 @interface LLAsset : NSObject
 
 /// PHAsset/ALAsset
-@property (nonatomic, strong) id asset;
+@property (nonatomic, strong, readonly) id asset;
 /// 类型
-@property (nonatomic, assign) LLMediaType mediaType;
+@property (nonatomic, assign, readonly) LLMediaType mediaType;
+/// 选中状态
+@property (nonatomic, assign) BOOL isSelected;
 
 //------------------------ photo ------------------------//
 /// 原图
-@property (nonatomic, strong) UIImage *originImage;
+@property (nonatomic, strong, readonly) UIImage *originImage;
 
 /// 缩略图 80*80
-@property (nonatomic, strong) UIImage *thumbnail;
+@property (nonatomic, strong, readonly) UIImage *thumbnail;
 
 /// 预览图 screen size
-@property (nonatomic, strong) UIImage *previewImage;
+@property (nonatomic, strong, readonly) UIImage *previewImage;
 
 /// 图片方向
-@property (nonatomic, assign) UIImageOrientation imageOrientation;
+@property (nonatomic, assign, readonly) UIImageOrientation imageOrientation;
 
 
 //------------------------ video ------------------------//
 /// 时长
-@property (nonatomic, strong) NSString *time;
+@property (nonatomic, strong, readonly) NSString *time;
 
 /// 视频item
-@property (nonatomic, strong) AVPlayerItem *playerItem;
+@property (nonatomic, strong, readonly) AVPlayerItem *playerItem;
 
 /// 视频item信息
-@property (nonatomic, strong) NSDictionary *playerItemInfo;
+@property (nonatomic, strong, readonly) NSDictionary *playerItemInfo;
 
 + (LLAsset *)assetWithItem:(id)asset;
 @end

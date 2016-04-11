@@ -10,6 +10,20 @@
 
 @interface LLAsset()
 
+@property (nonatomic, strong) id asset;
+@property (nonatomic, assign) LLMediaType mediaType;
+
+//------------------------ photo ------------------------//
+@property (nonatomic, strong) UIImage *originImage;
+@property (nonatomic, strong) UIImage *thumbnail;
+@property (nonatomic, strong) UIImage *previewImage;
+@property (nonatomic, assign) UIImageOrientation imageOrientation;
+
+//------------------------ video ------------------------//
+@property (nonatomic, strong) NSString *time;
+@property (nonatomic, strong) AVPlayerItem *playerItem;
+@property (nonatomic, strong) NSDictionary *playerItemInfo;
+
 @property (nonatomic, strong) PHCachingImageManager *cachingImageManager;
 
 @end
@@ -20,6 +34,7 @@
     
     LLAsset *myAsset = [[LLAsset alloc] init];
     myAsset.asset = asset;
+    myAsset.isSelected = NO;
     
     return myAsset;
 }
@@ -213,8 +228,8 @@
         imageRequestOptions.synchronous = YES;
         imageRequestOptions.resizeMode = PHImageRequestOptionsResizeModeExact;
         // 在 PHImageManager 中，targetSize 等 size 都是使用 px 作为单位，因此需要对targetSize 中对传入的 Size 进行处理，宽高各自乘以 ScreenScale，从而得到正确的图片
-        CGSize size = CGSizeMake(kLLThumbnailSize.width * kLLScreenScale, kLLThumbnailSize.height * kLLScreenScale);
-        [self.cachingImageManager requestImageForAsset:_asset targetSize:size contentMode:PHImageContentModeAspectFit options:imageRequestOptions resultHandler:^(UIImage *result, NSDictionary *info) {
+        CGSize scaledsize = CGSizeMake(size.width * kLLScreenScale, size.height * kLLScreenScale);
+        [self.cachingImageManager requestImageForAsset:_asset targetSize:scaledsize contentMode:PHImageContentModeAspectFit options:imageRequestOptions resultHandler:^(UIImage *result, NSDictionary *info) {
             
             resultImage = result;
         }];

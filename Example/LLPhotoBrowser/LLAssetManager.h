@@ -38,6 +38,8 @@ typedef NS_ENUM(NSInteger, LLBrowserType){
 - (NSArray *)allAssetGroups;
 
 - (NSArray *)assetsWithGroup:(id)group filterType:(LLBrowserType)type;
+
+
 @end
 
 #import "LLAsset.h"

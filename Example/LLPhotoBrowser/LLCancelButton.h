@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LLCancelButton : UIBarButtonItem
+@interface LLCancelButton : UIButton
 
 
 - (instancetype)initWithController:(UIViewController *)controller;

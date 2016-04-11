@@ -16,6 +16,8 @@
 #define iOS9Later ([UIDevice currentDevice].systemVersion.floatValue >= 9.0f)
 
 #define kScreenSize [UIScreen mainScreen].bounds.size
+#define kScreenWidth [UIScreen mainScreen].bounds.size.width
+#define kScreenHeight [UIScreen mainScreen].bounds.size.height
 
 #define kLLThumbnailSize CGSizeMake(80, 80)
 
