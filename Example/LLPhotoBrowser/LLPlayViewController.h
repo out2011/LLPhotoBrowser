@@ -9,10 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "LLAssetManager.h"
 
+typedef void (^assetsSelectedBlock)(NSArray *selectedAssets);
+
 @interface LLPlayViewController : UIViewController
+
+@property (nonatomic, strong) NSMutableArray *selectedAssets;
 
 @property (nonatomic, strong) NSArray *assets;
 
 @property (nonatomic, assign) NSInteger currentIndex;
+
+@property (nonatomic, copy) assetsSelectedBlock block;
 
 @end

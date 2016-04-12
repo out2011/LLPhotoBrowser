@@ -17,19 +17,38 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="N2a-F8-EnQ">
                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                     </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="suI-Qj-ufp">
+                        <rect key="frame" x="23" y="2" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="IEi-Al-A1d"/>
+                            <constraint firstAttribute="width" constant="25" id="muh-9L-pl2"/>
+                        </constraints>
+                        <state key="normal" image="btn_cancel"/>
+                        <state key="selected" image="btn_choice"/>
+                        <connections>
+                            <action selector="selected:" destination="vBv-a1-wfH" eventType="touchUpInside" id="roB-ni-hgs"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
+                <constraint firstItem="suI-Qj-ufp" firstAttribute="top" secondItem="vBv-a1-wfH" secondAttribute="top" constant="2" id="41d-KA-2HC"/>
                 <constraint firstItem="N2a-F8-EnQ" firstAttribute="top" secondItem="vBv-a1-wfH" secondAttribute="top" id="Czx-2n-Pqa"/>
                 <constraint firstAttribute="bottom" secondItem="N2a-F8-EnQ" secondAttribute="bottom" id="Iwk-Zx-wKB"/>
                 <constraint firstItem="N2a-F8-EnQ" firstAttribute="leading" secondItem="vBv-a1-wfH" secondAttribute="leading" id="UST-2h-meV"/>
+                <constraint firstAttribute="trailing" secondItem="suI-Qj-ufp" secondAttribute="trailing" constant="2" id="gqC-Zx-7rT"/>
                 <constraint firstAttribute="trailing" secondItem="N2a-F8-EnQ" secondAttribute="trailing" id="uUo-Nh-cK3"/>
             </constraints>
             <connections>
+                <outlet property="btnSelected" destination="suI-Qj-ufp" id="sU1-FU-UH3"/>
                 <outlet property="thumbnail" destination="N2a-F8-EnQ" id="UDD-08-Shv"/>
             </connections>
             <point key="canvasLocation" x="238" y="215"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="btn_cancel" width="23" height="23"/>
+        <image name="btn_choice" width="23" height="23"/>
+    </resources>
 </document>

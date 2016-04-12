@@ -11,6 +11,7 @@
 #import "LLAssetGroup.h"
 #import "LLAlbumTableController.h"
 
+
 @interface ViewController ()
 
 @end
@@ -25,7 +26,36 @@
 
 - (IBAction)buttonPressed:(id)sender {
     
-    /// 获取调用相册时系统提示方法
+    if (iOS8Later) {
+        
+        [self photoAuthorizationIOS8Later];
+    }
+    else {
+        
+        [self photoAuthorizationIOS8Before];
+    }
+}
+
+- (void)photoAuthorizationIOS8Later {
+    
+    if ([PHPhotoLibrary authorizationStatus] == PHAuthorizationStatusNotDetermined) {
+        
+        [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+            
+            if (status == PHAuthorizationStatusAuthorized) {
+                
+                [self pushToPhotoController];
+            }
+        }];
+    }
+    else {
+        
+        [self pushToPhotoController];
+    }
+}
+
+- (void)photoAuthorizationIOS8Before {
+    
     if ([ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusNotDetermined) {
         
         ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc] init];
@@ -34,12 +64,7 @@
             
             if (*stop) {
                 
-                LLAlbumTableController *albumTC = [[LLAlbumTableController alloc] init];
-                albumTC.browserType = kBrowserPlay;
-                
-                UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:albumTC];
-                
-                [self presentViewController:naVC animated:YES completion:nil];
+                [self pushToPhotoController];
                 return;
             }
             *stop = TRUE;
@@ -52,16 +77,18 @@
     
     else {
         
-        LLAlbumTableController *albumTC = [[LLAlbumTableController alloc] init];
-        albumTC.browserType = kBrowserPlay;
-        
-        UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:albumTC];
-        
-        [self presentViewController:naVC animated:YES completion:nil];
+        [self pushToPhotoController];
     }
-    
-    
 }
 
+- (void)pushToPhotoController {
+    
+    LLAlbumTableController *albumTC = [[LLAlbumTableController alloc] init];
+    albumTC.browserType = kBrowserPlay;
+    
+    UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:albumTC];
+    
+    [self presentViewController:naVC animated:YES completion:nil];
+}
 
 @end

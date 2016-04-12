@@ -9,6 +9,7 @@
 #import "LLPlayViewController.h"
 #import "LLAssetManager.h"
 #import "LLCancelButton.h"
+#import "LLPlayImageView.h"
 
 @interface LLPlayViewController ()<UIScrollViewDelegate>
 
@@ -50,8 +51,8 @@
     }
     
     _customNavigationBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 64)];
-    _customNavigationBar.backgroundColor = [UIColor lightGrayColor];
-    _customNavigationBar.alpha = 0.9;
+    _customNavigationBar.backgroundColor = [UIColor whiteColor];
+    _customNavigationBar.alpha = 0.95;
     
     LLCancelButton *cancelBt = [[LLCancelButton alloc] initWithController:self];
     cancelBt.frame = CGRectMake(kScreenWidth - 35 - 20, 30, 38, 25);
@@ -77,17 +78,31 @@
     return _imageViews;
 }
 
+#pragma mark - interface
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.selectedAssets = [NSMutableArray array];
     
+    self.view.backgroundColor = [UIColor whiteColor];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     [self.view addSubview:self.scrollView];
     [self.view addSubview:self.customNavigationBar];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationAssetSelected:) name:@"playAssetSelected" object:nil];
+    
     [self addImageViews];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    if (!_selectedAssets) {
+        
+        _selectedAssets = [NSMutableArray array];
+    }
 }
 
 - (void)addImageViews {
@@ -106,10 +121,9 @@
     
     LLAsset *asset = _assets[index];
     
-    UIImageView *imageView = [[UIImageView alloc] init];
+    LLPlayImageView *imageView = [[[NSBundle mainBundle] loadNibNamed:@"LLPlayImageView" owner:self options:nil] lastObject];
     imageView.frame = CGRectMake(kScreenWidth * index, 0, kScreenWidth, kScreenHeight);
-    imageView.image = asset.previewImage;
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    imageView.asset = asset;
     
     if (index < _currentIndex) {
         
@@ -143,7 +157,32 @@
 #pragma mark - button pressed
 - (void)back {
     
+    if (self.block) {
+        
+        _block(_selectedAssets);
+    }
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark - notification 
+- (void)notificationAssetSelected:(NSNotification *)notification {
+    
+    LLAsset *asset = [notification object];
+    asset.isSelected = !asset.isSelected;
+    
+    if (asset.isSelected) {
+        
+        [_selectedAssets addObject:asset];
+    }
+    else {
+        
+        [_selectedAssets removeObject:asset];
+    }
+}
+
+- (void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"playAssetSelected" object:nil];
+}
 @end

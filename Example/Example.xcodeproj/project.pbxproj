@@ -20,6 +20,8 @@
 		3A23C3D01CAE5B8400E0BBB2 /* LLAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A23C3CF1CAE5B8400E0BBB2 /* LLAsset.m */; };
 		3A23C3D31CAE5B9600E0BBB2 /* LLAssetGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A23C3D21CAE5B9600E0BBB2 /* LLAssetGroup.m */; };
 		3A3E6C041CB65D0800BF91E2 /* LLPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3E6C031CB65D0800BF91E2 /* LLPlayViewController.m */; };
+		3A8061501CBC983C0019B224 /* LLPlayImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A80614F1CBC983C0019B224 /* LLPlayImageView.m */; };
+		3A8061521CBC98570019B224 /* LLPlayImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A8061511CBC98570019B224 /* LLPlayImageView.xib */; };
 		3AB554B21CB4EE0D00540317 /* LLAlbumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB554B11CB4EE0D00540317 /* LLAlbumCell.m */; };
 		3AB554B41CB4EE3F00540317 /* LLAlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AB554B31CB4EE3F00540317 /* LLAlbumCell.xib */; };
 		3AB554B71CB4FE2D00540317 /* LLAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB554B61CB4FE2D00540317 /* LLAssetCell.m */; };
@@ -52,6 +54,9 @@
 		3A23C3D21CAE5B9600E0BBB2 /* LLAssetGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAssetGroup.m; sourceTree = "<group>"; };
 		3A3E6C021CB65D0800BF91E2 /* LLPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLPlayViewController.h; sourceTree = "<group>"; };
 		3A3E6C031CB65D0800BF91E2 /* LLPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLPlayViewController.m; sourceTree = "<group>"; };
+		3A80614E1CBC983C0019B224 /* LLPlayImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLPlayImageView.h; sourceTree = "<group>"; };
+		3A80614F1CBC983C0019B224 /* LLPlayImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLPlayImageView.m; sourceTree = "<group>"; };
+		3A8061511CBC98570019B224 /* LLPlayImageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LLPlayImageView.xib; sourceTree = "<group>"; };
 		3AB554B01CB4EE0D00540317 /* LLAlbumCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAlbumCell.h; sourceTree = "<group>"; };
 		3AB554B11CB4EE0D00540317 /* LLAlbumCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAlbumCell.m; sourceTree = "<group>"; };
 		3AB554B31CB4EE3F00540317 /* LLAlbumCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LLAlbumCell.xib; sourceTree = "<group>"; };
@@ -160,6 +165,9 @@
 				3AB554B81CB4FE5700540317 /* LLAssetCell.xib */,
 				3A15F58E1CB600C400E13729 /* LLCancelButton.h */,
 				3A15F58F1CB600C400E13729 /* LLCancelButton.m */,
+				3A80614E1CBC983C0019B224 /* LLPlayImageView.h */,
+				3A80614F1CBC983C0019B224 /* LLPlayImageView.m */,
+				3A8061511CBC98570019B224 /* LLPlayImageView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -223,6 +231,7 @@
 			files = (
 				3A23C3BD1CAE048400E0BBB2 /* LaunchScreen.storyboard in Resources */,
 				3AB554B91CB4FE5700540317 /* LLAssetCell.xib in Resources */,
+				3A8061521CBC98570019B224 /* LLPlayImageView.xib in Resources */,
 				3AB554B41CB4EE3F00540317 /* LLAlbumCell.xib in Resources */,
 				3A23C3BA1CAE048400E0BBB2 /* Assets.xcassets in Resources */,
 				3A23C3B81CAE048400E0BBB2 /* Main.storyboard in Resources */,
@@ -242,6 +251,7 @@
 				3AB554B21CB4EE0D00540317 /* LLAlbumCell.m in Sources */,
 				3A23C3B51CAE048400E0BBB2 /* ViewController.m in Sources */,
 				3A23C3B21CAE048400E0BBB2 /* AppDelegate.m in Sources */,
+				3A8061501CBC983C0019B224 /* LLPlayImageView.m in Sources */,
 				3A23C3D01CAE5B8400E0BBB2 /* LLAsset.m in Sources */,
 				3A1EB9181CB49B31002A4EBF /* LLPhotoCollectionController.m in Sources */,
 				3AB554B71CB4FE2D00540317 /* LLAssetCell.m in Sources */,
