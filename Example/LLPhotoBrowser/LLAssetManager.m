@@ -14,6 +14,8 @@ static LLAssetManager *assetManager = nil;
 
 @interface LLAssetManager()
 
+@property (nonatomic, strong) NSArray *selectedAssets;
+
 @property (nonatomic, strong) NSMutableArray *assets;
 @property (nonatomic, strong) NSMutableArray *assetGroups;
 
@@ -148,7 +150,7 @@ static LLAssetManager *assetManager = nil;
     return _assetGroups;
 }
 
-- (NSArray *)assetsWithGroup:(id)group filterType:(LLBrowserType)type {
+- (NSArray *)assetsWithGroup:(id)group type:(LLBrowserType)type {
     
     LLAssetGroup *album = (LLAssetGroup *)group;
     
@@ -207,5 +209,10 @@ static LLAssetManager *assetManager = nil;
         
         return kMediaTypeNormal;
     }
+}
+
+- (void)fillSelectedAssets:(NSMutableArray *)assets {
+    
+    _selectedAssets = [assets copy];
 }
 @end

@@ -26,6 +26,10 @@
         
         self.btnSelected.selected = YES;
     }
+    else {
+        
+        self.btnSelected.selected = NO;
+    }
 }
 
 - (IBAction)selected:(UIButton *)sender {

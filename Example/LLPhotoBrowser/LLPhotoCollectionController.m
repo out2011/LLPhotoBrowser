@@ -12,15 +12,51 @@
 #import "LLCancelButton.h"
 #import "LLPlayViewController.h"
 
+#define MJWeakSelf __weak typeof(self) weakSelf = self;
+
 @interface LLPhotoCollectionController()<UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, assign) BOOL shouldHidden;
 
 @property (nonatomic, strong) NSMutableArray *selectedAssets;
 
+@property (nonatomic, strong) UIView *bottomView;
 @end
 
 @implementation LLPhotoCollectionController
+
+- (NSMutableArray *)selectedAssets {
+    
+    if (_selectedAssets) {
+        
+        return _selectedAssets;
+    }
+    return [NSMutableArray array];
+}
+
+- (UIView *)bottomView {
+    
+    if (_bottomView) {
+        
+        return _bottomView;
+    }
+    
+    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight - 44, kScreenWidth, 44)];
+    _bottomView.backgroundColor = [UIColor colorWithRed:247 / 255.0 green:247 / 255.0 blue:247 / 255.0 alpha:1];
+    
+    UIButton *btnSure = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnSure.frame = CGRectMake(kScreenWidth - 38 -20, 10, 38, 25);
+    [btnSure setTitle:@"确定" forState:UIControlStateNormal];
+    [btnSure setTitleColor:[UIColor colorWithRed:165 / 255.0 green:213 / 255.0 blue:132 / 255.0 alpha:1] forState:UIControlStateNormal];
+    [btnSure addTarget:self action:@selector(sure:) forControlEvents:UIControlEventTouchUpInside];
+    [_bottomView addSubview:btnSure];
+    
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 1)];
+    line.backgroundColor = [UIColor colorWithRed:223 / 255.0 green:223 / 255.0 blue:223 / 255.0 alpha:1];
+    [_bottomView addSubview:line];
+    
+    return _bottomView;
+}
 
 - (void)viewDidLoad {
     
@@ -31,26 +67,29 @@
         _shouldHidden = YES;
     }
     
+    [self.view addSubview:self.bottomView];
+    
     UIBarButtonItem *cancelBt = [[UIBarButtonItem alloc] init];
     cancelBt.customView = [[LLCancelButton alloc] initWithController:self];
     self.navigationItem.rightBarButtonItem = cancelBt;
+    
     self.collectionView.backgroundColor = [UIColor whiteColor];
     self.collectionView.delegate = self;
     [self.collectionView registerNib:[UINib nibWithNibName:@"LLAssetCell" bundle:nil] forCellWithReuseIdentifier:kAssetCellIdentifier];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationAssetSelected:) name:@"photoCollectionSelected" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationAssetSelected:) name:@"photoCollectionSelected" object:nil];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     
     if (_shouldHidden) {
         
         _shouldHidden = !_shouldHidden;
         
+        __weak typeof(self) weakSelf = self;
         LLPlayViewController *playVC = [[LLPlayViewController alloc] init];
         playVC.assets = _assets;
         playVC.currentIndex = 0;
@@ -58,26 +97,24 @@
         playVC.block = ^(NSArray *selectedAssets) {
             
             _selectedAssets = [selectedAssets mutableCopy];
-            [self.collectionView reloadData];
+            [weakSelf.collectionView reloadData];
         };
         
         [self.navigationController pushViewController:playVC animated:NO];
-    }
-    
-    if (!_selectedAssets) {
-        
-        _selectedAssets = [NSMutableArray array];
     }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"photoCollectionSelected" object:nil];
 }
 
-- (void)dismiss {
+#pragma mark - button pressed
+- (void)sure:(UIButton *)sender {
     
+    [[LLAssetManager shareInstance] fillSelectedAssets:_selectedAssets];
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -102,7 +139,7 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-
+    
     LLPlayViewController *playVC = [[LLPlayViewController alloc] init];
     playVC.assets = _assets;
     playVC.currentIndex = indexPath.row;
@@ -124,17 +161,12 @@
     
     if (asset.isSelected) {
         
-        [_selectedAssets addObject:asset];
+        [self.selectedAssets addObject:asset];
     }
     else {
         
-        [_selectedAssets removeObject:asset];
+        [self.selectedAssets removeObject:asset];
     }
 }
 
-- (void)dealloc {
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"photoCollectionSelected" object:nil];
-    
-}
 @end

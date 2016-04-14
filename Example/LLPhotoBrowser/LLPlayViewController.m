@@ -16,6 +16,7 @@
 @property (nonatomic, strong) UIScrollView *scrollView;
 
 @property (nonatomic, strong) UIView *customNavigationBar;
+@property (nonatomic, strong) UIView *bottomView;
 
 @property (nonatomic, assign) NSInteger scrollIndex;
 
@@ -68,6 +69,31 @@
     return _customNavigationBar;
 }
 
+- (UIView *)bottomView {
+    
+    if (_bottomView) {
+        
+        return _bottomView;
+    }
+    
+    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight - 44, kScreenWidth, 44)];
+    _bottomView.backgroundColor = [UIColor colorWithRed:247 / 255.0 green:247 / 255.0 blue:247 / 255.0 alpha:1];
+    
+    UIButton *btnSure = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnSure.frame = CGRectMake(kScreenWidth - 38 -20, 10, 38, 25);
+    [btnSure setTitle:@"确定" forState:UIControlStateNormal];
+    [btnSure setTitleColor:[UIColor colorWithRed:165 / 255.0 green:213 / 255.0 blue:132 / 255.0 alpha:1] forState:UIControlStateNormal];
+    [btnSure addTarget:self action:@selector(sure:) forControlEvents:UIControlEventTouchUpInside];
+    [_bottomView addSubview:btnSure];
+    
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 1)];
+    line.backgroundColor = [UIColor colorWithRed:223 / 255.0 green:223 / 255.0 blue:223 / 255.0 alpha:1];
+    [_bottomView addSubview:line];
+    
+    return _bottomView;
+}
+
+
 - (NSMutableArray *)imageViews {
     
     if (_imageViews) {
@@ -83,14 +109,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.selectedAssets = [NSMutableArray array];
-    
     self.view.backgroundColor = [UIColor whiteColor];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     [self.view addSubview:self.scrollView];
     [self.view addSubview:self.customNavigationBar];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationAssetSelected:) name:@"playAssetSelected" object:nil];
+    [self.view addSubview:self.bottomView];
     
     [self addImageViews];
 }
@@ -99,10 +122,20 @@
     
     [super viewWillAppear:animated];
     
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationAssetSelected:) name:@"playAssetSelected" object:nil];
+    
     if (!_selectedAssets) {
         
         _selectedAssets = [NSMutableArray array];
     }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"playAssetSelected" object:nil];
 }
 
 - (void)addImageViews {
@@ -124,7 +157,6 @@
     LLPlayImageView *imageView = [[[NSBundle mainBundle] loadNibNamed:@"LLPlayImageView" owner:self options:nil] lastObject];
     imageView.frame = CGRectMake(kScreenWidth * index, 0, kScreenWidth, kScreenHeight);
     imageView.asset = asset;
-    
     if (index < _currentIndex) {
         
         [self.imageViews insertObject:imageView atIndex:0];
@@ -133,9 +165,10 @@
         
         [self.imageViews addObject:imageView];
     }
-    
     [self.scrollView addSubview:imageView];
     
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTouched:)];
+    [imageView addGestureRecognizer:gesture];
 }
 
 #pragma mark - scroll view delegate
@@ -165,12 +198,28 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)sure:(UIButton *)sender {
+    
+    [[LLAssetManager shareInstance] fillSelectedAssets:_selectedAssets];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imageTouched:(UIGestureRecognizer *)sender {
+    
+    __weak typeof(*&self) weakSelf = self;
+    [UIView animateWithDuration:0.3 animations:^{
+        
+        
+        weakSelf.customNavigationBar.alpha = weakSelf.customNavigationBar.alpha == 0.0 ? 1.0 : 0.0;
+        weakSelf.bottomView.alpha = weakSelf.bottomView.alpha == 0.0 ? 1.0 : 0.0;
+    }];
+}
+
 #pragma mark - notification 
 - (void)notificationAssetSelected:(NSNotification *)notification {
     
-    LLAsset *asset = [notification object];
+    LLAsset *asset = notification.object;
     asset.isSelected = !asset.isSelected;
-    
     if (asset.isSelected) {
         
         [_selectedAssets addObject:asset];
@@ -181,8 +230,4 @@
     }
 }
 
-- (void)dealloc {
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"playAssetSelected" object:nil];
-}
 @end

@@ -31,15 +31,22 @@ typedef NS_ENUM(NSInteger, LLBrowserType){
 
 @interface LLAssetManager : NSObject
 
+@property (nonatomic, strong, readonly) NSArray *selectedAssets;
+@property (nonatomic, assign) NSInteger maxNumber;
+
 + (LLAssetManager *)shareInstance;
 
+/// 根据分类在所有照片中过滤对象
 - (NSArray *)allAssetsWithType:(LLBrowserType)type;
 
+/// 所有相册
 - (NSArray *)allAssetGroups;
 
-- (NSArray *)assetsWithGroup:(id)group filterType:(LLBrowserType)type;
+/// 根据分类在当前相册中过滤对象
+- (NSArray *)assetsWithGroup:(id)group type:(LLBrowserType)type;
 
-
+/// 讲选中照片存入manager
+- (void)fillSelectedAssets:(NSMutableArray *)assets;
 @end
 
 #import "LLAsset.h"

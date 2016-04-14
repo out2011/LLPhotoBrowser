@@ -113,7 +113,7 @@
     
     LLAssetGroup *album = _albums[indexPath.row];
     
-    photoCC.assets = [self.assetManager assetsWithGroup:album filterType:_browserType];
+    photoCC.assets = [self.assetManager assetsWithGroup:album type:_browserType];
     photoCC.title = album.name;
     
     [self.navigationController pushViewController:photoCC animated:YES];

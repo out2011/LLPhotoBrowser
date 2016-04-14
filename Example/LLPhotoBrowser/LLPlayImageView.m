@@ -33,4 +33,5 @@
     sender.selected = !sender.selected;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"playAssetSelected" object:_asset];
 }
+
 @end

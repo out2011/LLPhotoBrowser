@@ -24,6 +24,12 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    NSLog(@"%ld", [LLAssetManager shareInstance].selectedAssets.count);
+}
+
 - (IBAction)buttonPressed:(id)sender {
     
     if (iOS8Later) {
