@@ -126,6 +126,7 @@
     layout.itemSize = CGSizeMake(itemWH, itemWH);
     layout.minimumInteritemSpacing = margin;
     layout.minimumLineSpacing = margin;
+    layout.footerReferenceSize = CGSizeMake(kScreenWidth, 44);
     return layout;
 }
 @end

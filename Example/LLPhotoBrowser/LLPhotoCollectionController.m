@@ -89,7 +89,6 @@
         
         _shouldHidden = !_shouldHidden;
         
-        __weak typeof(self) weakSelf = self;
         LLPlayViewController *playVC = [[LLPlayViewController alloc] init];
         playVC.assets = _assets;
         playVC.currentIndex = 0;
@@ -97,7 +96,7 @@
         playVC.block = ^(NSArray *selectedAssets) {
             
             _selectedAssets = [selectedAssets mutableCopy];
-            [weakSelf.collectionView reloadData];
+            [self.collectionView reloadData];
         };
         
         [self.navigationController pushViewController:playVC animated:NO];

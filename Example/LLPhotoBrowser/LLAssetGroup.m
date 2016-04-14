@@ -10,6 +10,12 @@
 
 @interface LLAssetGroup()
 
+/// 相册名称
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, assign) NSUInteger count;
+@property (nonatomic, strong) UIImage *thumbnail;
+@property (nonatomic, strong) id fetchResult;
+
 @property (nonatomic, strong) PHCachingImageManager *cachingImageManager;
 
 @end
@@ -49,7 +55,6 @@
         PHImageRequestOptions *imageRequestOptions = [[PHImageRequestOptions alloc] init];
         imageRequestOptions.synchronous = YES;
         imageRequestOptions.resizeMode = PHImageRequestOptionsResizeModeExact;
-        // 在 PHImageManager 中，targetSize 等 size 都是使用 px 作为单位，因此需要对targetSize 中对传入的 Size 进行处理，宽高各自乘以 ScreenScale，从而得到正确的图片
         CGSize size = CGSizeMake(kLLThumbnailSize.width * kLLScreenScale, kLLThumbnailSize.height * kLLScreenScale);
         [self.cachingImageManager requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeAspectFit options:imageRequestOptions resultHandler:^(UIImage *result, NSDictionary *info) {
             
@@ -67,7 +72,9 @@
 
 + (NSString *)albumNameWithSystemName:(NSString *)name {
     
-    if (iOS8Later) {
+    NSArray *languages = [NSLocale preferredLanguages];
+    NSString *currentLanguage = [languages objectAtIndex:0];
+    if (iOS8Later && [currentLanguage isEqualToString:@"zh-Hans-US"]) {
         NSString *newName;
         if ([name containsString:@"Roll"])         newName = @"相机胶卷";
         else if ([name containsString:@"Stream"])  newName = @"我的照片流";

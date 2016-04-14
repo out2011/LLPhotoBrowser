@@ -11,7 +11,6 @@
 #import "LLAssetGroup.h"
 #import "LLAlbumTableController.h"
 
-
 @interface ViewController ()
 
 @end
@@ -90,7 +89,7 @@
 - (void)pushToPhotoController {
     
     LLAlbumTableController *albumTC = [[LLAlbumTableController alloc] init];
-    albumTC.browserType = kBrowserPlay;
+    albumTC.browserType = kBrowserAlbum;
     
     UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:albumTC];
     

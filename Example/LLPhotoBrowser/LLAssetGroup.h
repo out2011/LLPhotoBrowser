@@ -12,16 +12,16 @@
 @interface LLAssetGroup : NSObject
 
 /// 相册名称
-@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong, readonly) NSString *name;
 
 /// 当前相册照片数量
-@property (nonatomic, assign) NSUInteger count;
+@property (nonatomic, assign, readonly) NSUInteger count;
 
 /// 缩略图 80*80
-@property (nonatomic, strong) UIImage *thumbnail;
+@property (nonatomic, strong, readonly) UIImage *thumbnail;
 
 /// PHFetchResult <PHAsset for iOS8 later> or ALAssetsGroup<ALAsset for iOS8 before>
-@property (nonatomic, strong) id fetchResult;
+@property (nonatomic, strong, readonly) id fetchResult;
 
 + (LLAssetGroup *)groupWithResult:(id)result name:(NSString *)name;
 

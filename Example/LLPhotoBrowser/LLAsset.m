@@ -104,10 +104,8 @@
     else {
         
         CGImageRef fullResolutionImageRef = [[(ALAsset *)_asset defaultRepresentation] fullResolutionImage];
-        // 通过 fullResolutionImage 获取到的的高清图实际上并不带上在照片应用中使用“编辑”处理的效果，需要额外在 AlAssetRepresentation 中获取这些信息
         NSString *adjustment = [[[(ALAsset *)_asset defaultRepresentation] metadata] objectForKey:@"AdjustmentXMP"];
         if (adjustment) {
-            // 如果照片编辑过，手动加入滤镜
             NSData *xmpData = [adjustment dataUsingEncoding:NSUTF8StringEncoding];
             CIImage *tempImage = [CIImage imageWithCGImage:fullResolutionImageRef];
             
@@ -124,7 +122,6 @@
                 fullResolutionImageRef = [context createCGImage:tempImage fromRect:[tempImage extent]];
             }
         }
-        // 生成最终返回的 UIImage，同时把图片的 orientation 也补充上去
         resultImage = [UIImage imageWithCGImage:fullResolutionImageRef scale:[[_asset defaultRepresentation] scale] orientation:(UIImageOrientation)[[_asset defaultRepresentation] orientation]];
     }
     _originImage = resultImage;
@@ -226,8 +223,7 @@
     if (iOS8Later) {
         PHImageRequestOptions *imageRequestOptions = [[PHImageRequestOptions alloc] init];
         imageRequestOptions.synchronous = YES;
-        imageRequestOptions.resizeMode = PHImageRequestOptionsResizeModeExact;
-        // 在 PHImageManager 中，targetSize 等 size 都是使用 px 作为单位，因此需要对targetSize 中对传入的 Size 进行处理，宽高各自乘以 ScreenScale，从而得到正确的图片
+//        imageRequestOptions.resizeMode = PHImageRequestOptionsResizeModeExact;
         CGSize scaledsize = CGSizeMake(size.width * kLLScreenScale, size.height * kLLScreenScale);
         [self.cachingImageManager requestImageForAsset:_asset targetSize:scaledsize contentMode:PHImageContentModeAspectFit options:imageRequestOptions resultHandler:^(UIImage *result, NSDictionary *info) {
             

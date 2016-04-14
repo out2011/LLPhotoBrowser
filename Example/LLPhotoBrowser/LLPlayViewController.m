@@ -209,7 +209,6 @@
     __weak typeof(*&self) weakSelf = self;
     [UIView animateWithDuration:0.3 animations:^{
         
-        
         weakSelf.customNavigationBar.alpha = weakSelf.customNavigationBar.alpha == 0.0 ? 1.0 : 0.0;
         weakSelf.bottomView.alpha = weakSelf.bottomView.alpha == 0.0 ? 1.0 : 0.0;
     }];

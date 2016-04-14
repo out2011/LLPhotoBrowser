@@ -65,7 +65,7 @@ static LLAssetManager *assetManager = nil;
         PHFetchResult *fetchResult = [PHAsset fetchAssetsInAssetCollection:collection options:options];
         if (fetchResult.count < 1) continue;
         if ([collection.localizedTitle containsString:@"Deleted"]) continue;
-        
+        if ([collection.localizedTitle isEqualToString:@"Recently Added"]) continue;
         if ([collection.localizedTitle isEqualToString:@"Camera Roll"]) {
             [_assetGroups insertObject:[LLAssetGroup groupWithResult:fetchResult name:collection.localizedTitle] atIndex:0];
         } else {
